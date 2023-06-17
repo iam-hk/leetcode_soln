@@ -3,7 +3,6 @@ class Solution {
         String[] words = paragraph.toLowerCase().split("[ !?',;.]+");
         HashSet<String>hs=new HashSet<>();
         HashMap<String,Integer>hm=new HashMap<>();
-        
         for(String s:banned)
             hs.add(s);
         for(String s:words)
@@ -14,7 +13,6 @@ class Solution {
         int max=0;
         for(String s:hm.keySet())
         {
-            //System.out.println(s+" "+hm.get(s));
             int val=hm.get(s);
             if(val>max)
             {
