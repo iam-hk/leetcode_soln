@@ -1,36 +1,53 @@
 class Solution {
+    public class Pair implements Comparable<Pair>{
+        int v1;
+        int v2;
+        int sum;
+        Pair(int v1,int v2)
+        {
+            this.v1=v1;
+            this.v2=v2;
+            this.sum=v1+v2;
+            
+        }
+        public int compareTo(Pair o)
+        {
+            return o.sum-this.sum;
+        }
+    }
     public List<List<Integer>> kSmallestPairs(int[] nums1, int[] nums2, int k) {
-          PriorityQueue<Pair<Integer, Pair<Integer, Integer>>> pq = new PriorityQueue<>((a, b) -> b.getKey() - a.getKey());
-        int n = nums1.length;
-        int m = nums2.length;
-
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++) {
-
-                int sum = nums1[i] + nums2[j];
-
-                if (pq.size() < k) {
-                    pq.offer(new Pair<>(sum, new Pair<>(nums1[i], nums2[j])));
-                } else if (sum < pq.peek().getKey()) {
-
-                    pq.poll();
-                    pq.offer(new Pair<>(sum, new Pair<>(nums1[i], nums2[j])));
-                } else {
-                    break;
+        List<List<Integer>>ans=new ArrayList<>();
+        PriorityQueue<Pair>pq=new PriorityQueue<>();
+        for(int i=0;i<nums1.length;i++)
+        {
+            for(int j=0;j<nums2.length;j++)
+            {
+                int sum=nums1[i]+nums2[j];
+                if(pq.size()<k)
+                {
+                    pq.add(new Pair(nums1[i],nums2[j]));
                 }
+                else
+                {
+                    if(sum<pq.peek().sum)
+                    {
+                        pq.poll();
+                        pq.add(new Pair(nums1[i],nums2[j]));
+                    }
+                    else
+                        break;
+                }
+                    
             }
         }
-
-        List<List<Integer>> ans = new ArrayList<>();
-
-        while (!pq.isEmpty()) {
-            Pair<Integer, Integer> pair = pq.poll().getValue();
-            List<Integer> pairList = new ArrayList<>();
-            pairList.add(pair.getKey());
-            pairList.add(pair.getValue());
-            ans.add(pairList);
+        while(pq.size()!=0)
+        {
+            List<Integer>l=new ArrayList<>();
+            Pair tmp=pq.poll();
+            l.add(tmp.v1);
+            l.add(tmp.v2);
+            ans.add(l);
         }
-
         return ans;
     }
 }
