@@ -1,36 +1,41 @@
 class Solution {
-     public int[] prisonAfterNDays(int[] cells, int N) {
-		
-        boolean hasCycle = false;
-        int cycle = 0;
-        HashSet<String> set = new HashSet<>(); 
-        for(int i=0;i<N;i++){
-            int[] next = nextDay(cells);
-            String key = Arrays.toString(next);
-            if(!set.contains(key)){ //store cell state
-                set.add(key);
-                cycle++;
+    public int[] prisonAfterNDays(int[] cells, int n) {
+        boolean cycle=false;
+        int count=0;
+        HashSet<String>hs=new HashSet<>();
+        for(int i=0;i<n;i++)
+        {
+            int arr[]=fnNext(cells);
+            String s=Arrays.toString(arr);
+            if(!hs.contains(s))
+            {
+                hs.add(s);
             }
-            else{ //hit a cycle
-                hasCycle = true;
+            else 
+            {
+                cycle=true;
                 break;
             }
-            cells = next;
+            ++count;
+            cells=arr;
         }
-        if(hasCycle){
-            N%=cycle;
-            for(int i=0;i<N;i++){
-                cells = nextDay(cells);
-            }   
+        if(cycle==true)
+        {
+            n%=count;
+            for(int i=0;i<n;i++)
+            {
+                cells=fnNext(cells);
+            }
         }
         return cells;
     }
-    
-    private int[] nextDay(int[] cells){
-        int[] tmp = new int[cells.length];
-        for(int i=1;i<cells.length-1;i++){
-            tmp[i]=cells[i-1]==cells[i+1]?1:0;
+    public int[]fnNext(int cell[])
+    {
+        int arr[]=new int[cell.length];
+        for(int i=1;i<cell.length-1;i++)
+        {
+            arr[i]=cell[i-1]==cell[i+1]?1:0;
         }
-        return tmp;
+        return arr;
     }
 }
