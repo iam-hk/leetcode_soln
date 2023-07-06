@@ -8,9 +8,8 @@ class Solution {
             return ;
             
         }
-        xor^=nums[index];
-        fnSubset(nums,xor,index+1);
-        xor^=nums[index];
+        
+        fnSubset(nums,xor^nums[index],index+1);
         fnSubset(nums,xor,index+1);
     }
     public int subsetXORSum(int[] nums) {
