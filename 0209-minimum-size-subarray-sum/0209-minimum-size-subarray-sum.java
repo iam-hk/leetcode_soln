@@ -9,14 +9,11 @@ class Solution {
                 if(sum>=target)
                     ans=Math.min(ans,end-start+1);
                 sum-=nums[start++];
-                
             }
-            
             ++end;
         }
         if(ans==nums.length+1)
             return 0;
-        
         return ans;
     }
 }
