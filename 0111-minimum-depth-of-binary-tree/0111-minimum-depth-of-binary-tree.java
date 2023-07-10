@@ -23,8 +23,7 @@ class Solution {
             return 1;
         int r=fnMin(root.right);
         int l=fnMin(root.left);
-        if(root.left==null&&root.right==null)
-        return 1;
+       
         if(root.left==null)
         return r+1;
         if(root.right==null)
