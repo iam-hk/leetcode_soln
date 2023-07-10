@@ -14,24 +14,27 @@
  * }
  */
 class Solution {
-    public int fnMin(TreeNode root)
-    {
-        int ht=-1;
+    public int minDepth(TreeNode root) {
         if(root==null)
             return 0;
-        if(root.left==null&&root.right==null)
-            return 1;
-        int r=fnMin(root.right);
-        int l=fnMin(root.left);
-       
-        if(root.left==null)
-        return r+1;
-        if(root.right==null)
-        return l+1;
-        return Math.min(l,r)+1;
-    }
-    public int minDepth(TreeNode root) {
-        int ht=fnMin(root);
-        return ht;
+        Queue<TreeNode>q=new ArrayDeque<>();
+        q.add(root);
+        int depth=1;
+        while(q.size()!=0)
+        {
+            int size=q.size();
+            for(int i=0;i<size;i++)
+            {
+                TreeNode tmp=q.remove();
+                if(tmp.left==null&&tmp.right==null)
+                    return depth;
+                if(tmp.left!=null)
+                    q.add(tmp.left);
+                if(tmp.right!=null)
+                    q.add(tmp.right);
+            }
+            ++depth;
+        }
+        return 0;
     }
 }
