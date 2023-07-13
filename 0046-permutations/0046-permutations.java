@@ -1,5 +1,5 @@
 class Solution {
-    public void fnPermute(int []arr,boolean visited[],List<List<Integer>>ans,List<Integer>a)
+   public void fnPermute(int []arr,boolean visited[],List<List<Integer>>ans,List<Integer>a)
     {
         
         for(int i=0;i<arr.length;i++)
