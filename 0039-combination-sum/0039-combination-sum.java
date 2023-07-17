@@ -1,28 +1,23 @@
 class Solution {
-    List<List<Integer>>ans=new ArrayList<>();
-    public void fnCombination(int []arr,int target,ArrayList<Integer>a,int i)
+    public void fnComb(int arr[],int ind,List<List<Integer>>ans,List<Integer>a,int target)
     {
         if(target==0)
-         {
-           ans.add(new ArrayList<>(a));
-           return;
-         }
-       if(i==arr.length)
-       {
-          return;
-       }
-        if(target<0)         
+        {
+            ans.add(new ArrayList<>(a));
             return ;
-        target-=arr[i];
-        a.add(arr[i]);
-        fnCombination(arr,target,a,i);
-        a.remove(Integer.valueOf(arr[i]));
-        target+=arr[i];
-        fnCombination(arr,target,a,i+1);
+            
+        }
+        if(ind==arr.length||target<0)
+            return;
+        a.add(arr[ind]);
+        fnComb(arr,ind,ans,a,target-arr[ind]);
+        a.remove(a.size()-1);
+        fnComb(arr,ind+1,ans,a,target);
     }
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        ArrayList<Integer>a=new ArrayList<>();
-        fnCombination(candidates,target,a,0);
+    public List<List<Integer>> combinationSum(int[] arr, int target) {
+        List<List<Integer>>ans=new ArrayList<>();
+        List<Integer>a=new ArrayList<>();
+        fnComb(arr,0,ans,a,target);
         return ans;
     }
 }
