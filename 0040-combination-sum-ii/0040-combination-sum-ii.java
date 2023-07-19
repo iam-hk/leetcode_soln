@@ -1,28 +1,31 @@
 class Solution {
-    List<List<Integer>>ans=new ArrayList<>();
-    public void fnCombination(int arr[],int target,List<Integer>a,int i)
+    public void fnComb(int arr[],int tar,List<List<Integer>>ans,List<Integer>a,int index)
     {
-        if(target==0)
-        {  
-            ans.add(new ArrayList<>(a));
-            return;
+        if(tar==0)
+        {
+            ans.add(new ArrayList<Integer>(a));
+            return ;
         }
-       for(int j=i;j<arr.length;j++)
-       {
-           if(j!=i&&arr[j]==arr[j-1])
-               continue;
-           if(arr[j]>target)
-               break;
-          
-           a.add(arr[j]);
-           fnCombination(arr,target-arr[j],a,j+1);
-           a.remove(a.size()-1);
-       }
+        if(index==arr.length)
+            return;
+    
+    for(int i=index;i<arr.length;i++)
+    {
+        if(i!=index&&arr[i]==arr[i-1])
+            continue;
+        if(tar<0)
+            break;
+        a.add(arr[i]);
+        fnComb(arr,tar-arr[i],ans,a,i+1);
+        a.remove(a.size()-1);
+        
     }
-    public List<List<Integer>> combinationSum2(int[] arr, int target) {
-        List<Integer>a=new ArrayList<>();
+    }
+    public List<List<Integer>> combinationSum2(int[] arr, int tar) {
+                List<List<Integer>>ans=new ArrayList<>();
         Arrays.sort(arr);
-        fnCombination(arr,target,a,0);
-        return ans;
+        List<Integer>a=new ArrayList<>();
+        fnComb(arr,tar,ans,a,0);
+        return ans;   
     }
 }
