@@ -34,65 +34,58 @@ class solve {
     // Function to determine if graph can be coloured with at most M colours
     // such
     // that no two adjacent vertices of graph are coloured with same colour.
-    public boolean fnColor(boolean graph[][],int m,int n,int node,int[]color)
+    public boolean fnCheck(ArrayList<ArrayList<Integer>>adj,int []color,int node,int c)
+    {
+        for(int i:adj.get(node))
+        {
+            if(color[i]==c)
+            return false;
+            
+        }
+        return true;
+    }
+    public boolean fnColor(ArrayList<ArrayList<Integer>>adj,int n,int m,int color[],int node)
     {
         if(node==n)
         return true;
+        
         for(int i=1;i<=m;i++)
         {
-            
-            boolean k=fnIsValid(graph,n,node,color,i);
-            if(k==true)
+            if(fnCheck(adj,color,node,i))
             {
-            color[node]=i;
-            boolean t=fnColor(graph,m,n,node+1,color);
-            if(t==true)
-            return true;
-            else 
-            color[node]=0;
+                color[node]=i;
+                boolean check=fnColor(adj,n,m,color,node+1);
+                if(check==true)
+                return true;
+                else 
+                color[node]=0;
+                
             }
-            
         }
         return false;
-        
-    }
-    public boolean fnIsValid(boolean graph[][],int n,int node,int color[],int c)
-    {
-        if(node==4)
-        {
-        //     System.out.println("color is"+c);
-        // for(int i:color)
-        // System.out.print(i+",");
-        // System.out.println();
-        }
-        for(int i=0;i<graph.length;i++)
-        {
-            if(graph[node][i]==true)
-            {
-                if(c==color[i])
-                return false;
-            }
-            
-            
-        }
-        // if(node==3)
-        // System.out.println("node3");
-        return true;
     }
     public boolean graphColoring(boolean graph[][], int m, int n) {
         // Your code here
+        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
+        for(int i=0;i<n;i++)
+        {
+            ArrayList<Integer>a=new ArrayList<>();
+            adj.add(new ArrayList<>(a));
+            
+        }
+        for(int i=0;i<graph.length;i++)
+        {
+            for(int j=0;j<graph.length;j++)
+            {
+                if(i==j)
+                continue;
+                if(graph[i][j]==true)
+                adj.get(i).add(j);
+                
+            }
+            
+        }
         int color[]=new int[n];
-        
-        // for(int i=0;i<graph.length;i++)
-        // {
-        //     for(int j=0;j<graph[i].length;j++)
-        //     System.out.print(graph[i][j]+" ");
-        //     System.out.println();
-        // }
-        boolean ans= fnColor(graph,m,n,0,color);
-        // for(int i:color)
-        // System.out.print(i+" ");
-        return ans;
-        
+        return fnColor(adj,n,m,color,0);
     }
 }
