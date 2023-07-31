@@ -45,18 +45,12 @@ class Solution {
             if(check==true)
                 break;
         }
-        // for(int i=0;i<n;i++)
-        // {
-        //     for(int j=0;j<n;j++)
-        //         System.out.print(visited[i][j]+ " " );
-        //     System.out.println();
-        // }
+      
         int steps=0;
         while(q.size()!=0)
         {
             int size=q.size();
-          // System.out.println(size);
-            
+         
             for(int i=0;i<size;i++)
             {
                 Pair tmp=q.remove();
