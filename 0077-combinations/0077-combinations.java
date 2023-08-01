@@ -12,7 +12,7 @@ class Solution {
             {
             a.add(i);
                 visited[i]=true;
-            fnComb(n,k,ans,a,visited,i);
+            fnComb(n,k,ans,a,visited,i+1);
             a.remove(a.size()-1);
                 visited[i]=false;
             }
