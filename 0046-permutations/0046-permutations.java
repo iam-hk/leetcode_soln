@@ -1,12 +1,12 @@
 class Solution {
     public void fnPerm(int nums[],List<Integer>a,List<List<Integer>>ans,int n,boolean visited[])
     {
-        if(a.size()==n)
-        {
-            ans.add(new ArrayList<>(a));
-            return ;
-            
-        }
+       if(a.size()==n)
+       {
+           ans.add(new ArrayList<>(a));
+           return ;
+           
+       }
         for(int i=0;i<n;i++)
         {
             if(!visited[i])
@@ -16,6 +16,7 @@ class Solution {
                 fnPerm(nums,a,ans,n,visited);
                 visited[i]=false;
                 a.remove(a.size()-1);
+                
             }
         }
     }
