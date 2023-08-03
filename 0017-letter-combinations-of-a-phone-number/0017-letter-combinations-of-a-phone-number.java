@@ -6,16 +6,13 @@ class Solution {
             ans.add(tmp);
             return;
         }
-        int digit=dig.charAt(ind)-'0';
-        String s=hm.get(digit);
+        int d=dig.charAt(ind)-'0';
+        String s=hm.get(d);
         for(int i=0;i<s.length();i++)
         {
-            tmp+=s.charAt(i);
-            fnCombination(dig,ind+1,tmp,ans,hm);
-            tmp=tmp.substring(0,tmp.length()-1);
+            fnCombination(dig,ind+1,tmp+s.charAt(i),ans,hm);
         }
-
-        }
+    }
     public List<String> letterCombinations(String digits) {
         HashMap<Integer,String>hm=new HashMap<>();
         hm.put(2,"abc");
