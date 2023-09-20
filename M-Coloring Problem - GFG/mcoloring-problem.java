@@ -34,58 +34,47 @@ class solve {
     // Function to determine if graph can be coloured with at most M colours
     // such
     // that no two adjacent vertices of graph are coloured with same colour.
-    public boolean fnCheck(ArrayList<ArrayList<Integer>>adj,int []color,int node,int c)
+    public boolean isPossible(int node,int i,int color[],List<List<Integer>>adj)
     {
-        for(int i:adj.get(node))
+        for(int j:adj.get(node))
         {
-            if(color[i]==c)
+            if(color[j]==i)
             return false;
-            
         }
         return true;
     }
-    public boolean fnColor(ArrayList<ArrayList<Integer>>adj,int n,int m,int color[],int node)
+    public boolean fnCheck(int m,int n,int[]color,List<List<Integer>> adj,int node)
     {
         if(node==n)
         return true;
-        
         for(int i=1;i<=m;i++)
         {
-            if(fnCheck(adj,color,node,i))
+            if(isPossible(node,i,color,adj))
             {
                 color[node]=i;
-                boolean check=fnColor(adj,n,m,color,node+1);
-                if(check==true)
+                boolean k=fnCheck(m,n,color,adj,node+1);
+                if(k==true)
                 return true;
-                else 
                 color[node]=0;
-                
             }
+            
         }
         return false;
     }
     public boolean graphColoring(boolean graph[][], int m, int n) {
         // Your code here
-        ArrayList<ArrayList<Integer>>adj=new ArrayList<>();
+        List<List<Integer>>adj=new ArrayList<>();
         for(int i=0;i<n;i++)
-        {
-            ArrayList<Integer>a=new ArrayList<>();
-            adj.add(new ArrayList<>(a));
-            
-        }
+        adj.add(new ArrayList<>());
         for(int i=0;i<graph.length;i++)
         {
-            for(int j=0;j<graph.length;j++)
-            {
-                if(i==j)
-                continue;
-                if(graph[i][j]==true)
-                adj.get(i).add(j);
-                
-            }
-            
+           for(int j=0;j<graph.length;j++)
+           {
+               if(graph[i][j]==true)
+               adj.get(i).add(j);
+           }
         }
         int color[]=new int[n];
-        return fnColor(adj,n,m,color,0);
+        return fnCheck(m,n,color,adj,0);
     }
 }
