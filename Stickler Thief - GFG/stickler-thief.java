@@ -34,17 +34,24 @@ class GFG
 class Solution
 {
     //Function to find the maximum money the thief can get.
+    public int fnAns(int arr[],int n,int dp[])
+    {
+        if(n<0)
+        return 0;
+        if(n==0)
+        return arr[n];
+        if(dp[n]!=0)
+        return dp[n];
+        int take=arr[n]+fnAns(arr,n-2,dp);
+        int nottake=fnAns(arr,n-1,dp);
+        int ans=Math.max(take,nottake);
+        return dp[n]=ans;
+    }
     public int FindMaxSum(int arr[], int n)
     {
         // Your code here
-        int inc=arr[0],exc=0;
-        for(int i=1;i<n;i++)
-        {
-            int ninc=exc+arr[i];
-            int nexc=Math.max(inc,exc);
-            inc=ninc;
-            exc=nexc;
-        }
-        return Math.max(inc,exc);
+        int dp[]=new int[n];
+        return fnAns(arr,n-1,dp);
+        
     }
 }
