@@ -36,7 +36,7 @@ class Solution
 	    sum+=i;
 	    boolean dp[][]=new boolean[n+1][sum+1];
 	    for(int i=0;i<=n;i++)
-	    dp[0][i]=true;
+	    dp[i][0]=true;
 	    for(int i=1;i<=sum;i++)
 	    dp[0][i]=false;
 	    for(int i=1;i<=n;i++)
@@ -57,12 +57,6 @@ class Solution
 	        }
 	        
 	    }
-	   // for(int i=0;i<=n;i++)
-	   // {
-	   //     for(int j=0;j<=sum;j++)
-	   //     System.out.print(dp[i][j]+" ");
-	   //     System.out.println();
-	   // }
 	    int ans=sum;
 	    for(int i=1;i<=sum;i++)
 	    {
