@@ -47,9 +47,7 @@ class Solution
 	        dp[i][j]=-1;
 	    }
 	    int ans=fnFind(len1-1,len2-1,s1,s2,dp);
-	    if(ans==len2)
-	    return len1-ans;
-	    else 
+	   
 	        return len1-ans+(len2-ans);
 	    
 	} 
