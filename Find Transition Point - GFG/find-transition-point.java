@@ -21,9 +21,10 @@ class Sorted_Array {
 
 
 class GfG {
+    int res=-1;
     int transitionPoint(int arr[], int n) {
         // code here
-        int st=0,e=n-1,res=-1;
+        int st=0,e=n-1;
           while (st <= e){
         int mid = st + (e-st)/2;
         
