@@ -41,7 +41,6 @@ class Solution{
         return Integer.MIN_VALUE;
         if(index==n)
         {
-           
             return Integer.MIN_VALUE;
         }
         if(dp[index][w]!=-1)
